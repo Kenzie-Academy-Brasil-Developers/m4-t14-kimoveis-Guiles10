@@ -270,9 +270,9 @@ describe('POST /schedules', () => {
 
   it('Error: Must not be able to create a schedule - JWT malformed', async () => {
     const response = await supertest(app)
-      .post(baseUrl)
-      .set('Authorization', `Bearer ${tokenMock.jwtMalformed}`)
-      .send({});
+    .post(baseUrl)
+    .set('Authorization', `Bearer ${tokenMock.jwtMalformed}`)
+    .send({});
 
     expect(response.body).toEqual(errorsMock.jwtMalformed.error);
     expect(response.status).toBe(errorsMock.jwtMalformed.status);
