@@ -26,7 +26,7 @@ describe('GET /realEstate', () => {
 
   it('Success: Must be able list all real estates', async () => {
     const response = await supertest(app).get(baseUrl).send();
-console.log(readRealEstate)
+    
     const expectResults = {
       status: 200,
       expectBody: readRealEstate,

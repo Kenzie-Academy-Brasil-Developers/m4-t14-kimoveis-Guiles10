@@ -1,6 +1,5 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
-import { Address } from "../entities";
 import { Category } from "../entities/category.entity";
 import { IAllCategorieReturn, ICategorieReturn, ICategorieUser } from "../interfaces/categorie.interface";
 import { returnAllCategorieSchema, returnCategorieSchema } from "../schemas/categorie.schema";
@@ -30,9 +29,7 @@ export const allCategorieService = async (): Promise<IAllCategorieReturn> => {
     return categories
 } 
 
-export const categorie_RealEstateService = async (getId:number): Promise<any> => { 
-
-    console.log(getId)
+export const categorie_RealEstateService = async (getId:number): Promise<Category | null> => { 
 
     const categoriesRepo: Repository<Category> = AppDataSource.getRepository(Category)
 

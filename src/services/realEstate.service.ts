@@ -4,11 +4,10 @@ import { Address } from "../entities/address.entity";
 import { Category } from "../entities/category.entity";
 import { RealEstate } from "../entities/realEstate.entity";
 import { AppError } from "../errors";
-import { ICreateRealEstate, IReturnRealEstate } from "../interfaces/realEstate.interface";
-import { returnAllRealEstateSchema, returnRealEstateSchema } from "../schemas/realEstate.schema";
+import { ICreateRealEstate, } from "../interfaces/realEstate.interface";
 
 
-export const createRealEstateService = async (playlod: any): Promise<any> => {
+export const createRealEstateService = async (playlod: ICreateRealEstate): Promise<RealEstate> => {
 
     const realEstateRepository: Repository<RealEstate> = AppDataSource.getRepository(RealEstate)
     const categorieRepository: Repository<Category> = AppDataSource.getRepository(Category)
@@ -25,7 +24,7 @@ export const createRealEstateService = async (playlod: any): Promise<any> => {
     const findAddress = await addressRepository.findOneBy({ 
         street: playlod.address.street,
         zipCode: playlod.address.zipCode,
-        number: playlod.address.number ? playlod.address.number : null,
+        number: playlod.address.number ? playlod.address.number : null!,
         city: playlod.address.city,
         state: playlod.address.state
     })
@@ -45,13 +44,11 @@ export const createRealEstateService = async (playlod: any): Promise<any> => {
 
     const createdRealEstate = await realEstateRepository.save(newRealEstate);
 
-    // const newCreateRealEstate = await returnRealEstateSchema.parse(createdRealEstate);
-
     return createdRealEstate;
 
 }  
 
-export const allRealEstateService = async (): Promise<any> => {
+export const allRealEstateService = async (): Promise<RealEstate[]> => {
     
     const realEstateRepository: Repository<RealEstate> = AppDataSource.getRepository(RealEstate)
         

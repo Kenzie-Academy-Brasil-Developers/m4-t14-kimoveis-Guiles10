@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { allScheduleController, createScheduleController } from "../controllers/schedule.controller";
-import { realEstateExistMidd } from "../middlewares/realEstateExistMidd";
 import { scheduleIsExistMidd } from "../middlewares/scheduleIsExistMidd";
 import { isAdminMidd } from "../middlewares/userIsAdminMidd";
 import { validadeDataMidd } from "../middlewares/validateDataMidd";

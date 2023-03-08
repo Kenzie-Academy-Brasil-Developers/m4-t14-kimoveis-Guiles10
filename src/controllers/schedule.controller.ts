@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { Schedule }  from "../entities/schedule.entiry";
+import { IScheduleUser } from "../interfaces/schedule.interface";
 import { allScheduleRealEstateService, createScheduleService } from "../services/schedule.service";
 
 
 
 export const createScheduleController = async (req: Request, res: Response) => {
 
-    const scheduleData: Schedule = req.body
+    const scheduleData: IScheduleUser = req.body
 
     const getIdByToken = req.user.id
 

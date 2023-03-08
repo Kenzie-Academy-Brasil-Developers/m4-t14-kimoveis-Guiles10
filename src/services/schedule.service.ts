@@ -3,9 +3,10 @@ import { AppDataSource } from "../data-source";
 import { RealEstate, User } from "../entities";
 import { Schedule }  from "../entities/schedule.entiry";
 import { AppError } from "../errors";
+import { IScheduleUser } from "../interfaces/schedule.interface";
 
 
-export const createScheduleService = async (data: any, id: number): Promise<any> => {
+export const createScheduleService = async (data: IScheduleUser, id: number): Promise<void> => {
 
     const scheduleRepo: Repository<Schedule> = AppDataSource.getRepository(Schedule)
     const userRepo: Repository<User> = AppDataSource.getRepository(User)
@@ -49,23 +50,18 @@ export const createScheduleService = async (data: any, id: number): Promise<any>
       throw new AppError('Invalid date, work days are monday to friday', 400);
     }
 
-
     const newSchedule = scheduleRepo.create({
         ...data,
         realEstate: realEstate,
-        user: user
+        user: user!
     })
 
     await scheduleRepo.save(newSchedule);
 
-    return newSchedule;
-
 }  
 
-export const allScheduleRealEstateService = async (id: number): Promise<any> => {
+export const allScheduleRealEstateService = async (id: number): Promise<RealEstate | null> => {
     
-    const scheduleRepo: Repository<Schedule> = AppDataSource.getRepository(Schedule)
-    const userRepo: Repository<User> = AppDataSource.getRepository(User)
     const realEstateRepo: Repository<RealEstate> = AppDataSource.getRepository(RealEstate)
 
     const listSchedules = await realEstateRepo.findOne({

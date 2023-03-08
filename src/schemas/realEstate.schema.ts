@@ -14,7 +14,6 @@ export const returnAdressSchema = createAddressSchema.extend({
 export const createRealEstateSchema = z.object({
     value: union([z.string(), z.number()]),
     size: z.number().positive(),
-    sold: z.boolean().default(false),
     address: createAddressSchema,
     categoryId: z.number()
 })
